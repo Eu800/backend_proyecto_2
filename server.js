@@ -8,7 +8,7 @@ const PORT = 8000;
 
 // Configuración de Firebase Admin SDK
 
-const serviceAccount = require('./nanec2-firebase-adminsdk-ex1gf-496668c72b.json');
+const serviceAccount = require('./geoalerta-2af22-firebase-adminsdk-fbsvc-6c5cfc6fe4.json');
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount)
 });
