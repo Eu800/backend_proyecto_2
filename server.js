@@ -20,10 +20,10 @@ conectarBaseDatos();
 app.use(bodyParser.json());
 
 // Rutas
-const eventosRutas = require('./routes/eventos.routes');
+const reportesRutas = require('./routes/reportes.routes');
 const usuariosRutas = require('./routes/usuarios.routes');
 
-eventosRutas(app);
+reportesRutas(app);
 usuariosRutas(app);
 //server
 app.listen(PORT, () => {
