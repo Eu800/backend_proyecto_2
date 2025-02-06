@@ -25,7 +25,5 @@ exports.registrarUsuario = async (req, res) => {
 
         console.error('Error registrando usuario:', error);
         res.status(500).json({ error: 'Error interno del servidor' });
-
     }
-
 };
