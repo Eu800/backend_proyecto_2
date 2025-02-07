@@ -10,7 +10,7 @@ exports.registrarUsuario = async (req, res) => {
         }
 
         // Lista de suscripciones válidas
-        const tiposValidos = ['actividad_criminal', 'trafico_vehicular', 'cierre_peatonal', 'desastre_natural', 'incendio', 'sin_suscripcion'];
+        const tiposValidos = ['actividad_criminal', 'cierre_vehicular ', 'cierre_peatonal', 'desastre_natural', 'incendio', 'sin_suscripcion'];
 
         // Validar que el tipoSuscripcion sea correcto
         if (!tiposValidos.includes(tipoSuscripcion)) {
@@ -70,7 +70,7 @@ exports.eliminarSuscripcion = async (req, res) => {
         }
 
         // Lista de suscripciones válidas
-        const tiposValidos = ['actividad_criminal', 'trafico_vehicular', 'cierre_peatonal', 'desastre_natural', 'incendio', 'sin_suscripcion'];
+        const tiposValidos = ['actividad_criminal', 'cierre_vehicular ', 'cierre_peatonal', 'desastre_natural', 'incendio', 'sin_suscripcion'];
 
         // Validar que el valor en eliminarSuscripcion sea correcto
         if (!tiposValidos.includes(eliminarSuscripcion)) {

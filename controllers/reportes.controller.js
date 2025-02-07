@@ -4,9 +4,9 @@ const admin = require('firebase-admin');
 // const { notificarClientes } = require('./websocket.controller');
 
 exports.crearReporte = async (req, res) => {
-    const { tipo, quePasa, direccion, informacionExtra, duracion, latLng, iconoRes } = req.body;
+    const { tipo, quePasa, direccion, informacionExtra, duracion, lat, lng, iconoRes } = req.body;
 
-    if (!['actividad_criminal', 'trafico_vehicular', 'cierre_peatonal', 'desastre_natural', 'incendio'].includes(tipo)) {
+    if (!['actividad_criminal', 'cierre_vehicular', 'cierre_peatonal', 'desastre_natural', 'incendio'].includes(tipo)) {
         return res.status(400).send({ error: 'Tipo de reporte no válido.' });
     }
 
@@ -16,7 +16,8 @@ exports.crearReporte = async (req, res) => {
         direccion,
         informacionExtra,
         duracion,
-        latLng,
+        lat,
+        lng,
         iconoRes
     });
     await nuevoReporte.save();
