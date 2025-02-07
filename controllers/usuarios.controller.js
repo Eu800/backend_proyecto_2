@@ -7,7 +7,7 @@ exports.registrarUsuario = async (req, res) => {
         const { token, tipoSuscripcion, nombre, mail, contraseña, fecha_nacimiento } = req.body;
 
         // Validar que el tipo de suscripción sea válido
-        const tiposValidos = ['actividad_criminal', 'trafico_vehicular', 'cierre_peatonal', 'desastre_natural', 'incendio'];
+        const tiposValidos = ['actividad_criminal', 'cierre_vehicular', 'cierre_peatonal', 'desastre_natural', 'incendio'];
         if (!tiposValidos.includes(tipoSuscripcion)) {
             return res.status(400).json({ error: 'Tipo de suscripción no válido.' });
         }
