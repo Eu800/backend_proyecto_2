@@ -22,9 +22,12 @@ app.use(bodyParser.json());
 // Rutas
 const reportesRutas = require('./routes/reportes.routes');
 const usuariosRutas = require('./routes/usuarios.routes');
+const canalesRutas = require('./routes/canal.routes');
 
 reportesRutas(app);
 usuariosRutas(app);
+canalesRutas(app);
+
 //server
 app.listen(PORT, () => {
     console.log(`Servidor corriendo en http://localhost:${PORT}`);
