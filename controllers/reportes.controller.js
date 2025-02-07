@@ -1,7 +1,7 @@
 const Reporte = require('../models/reporte.model');
 const Usuario = require('../models/usuario.model');
 const admin = require('firebase-admin');
-// const { notificarClientes } = require('./websocket.controller');
+const { notificarClientes } = require('./websocket.controller');
 
 exports.crearReporte = async (req, res) => {
     const { tipo, quePasa, direccion, informacionExtra, duracion, lat, lng, iconoRes } = req.body;
@@ -21,21 +21,28 @@ exports.crearReporte = async (req, res) => {
         iconoRes
     });
     await nuevoReporte.save();
+    console.log(nuevoReporte._id.toString)
 
-    // Notificamos a los usuarios suscritos
-    // const usuarios = await Usuario.find({ tipoSuscripcion: tipo });
-    // usuarios.forEach(usuario => {
-    //     admin.messaging().send({
-    //         token: usuario.token,
-    //         notification: {
-    //             title: `Nuevo reporte ${tipo}!`,
-    //             body: `${quePasa} - ${direccion}`
-    //         },
-    //         data: { quePasa, direccion, informacionExtra, tipo, fecha: nuevoReporte.fecha }
-    //     });
-    // });
-
-    // notificarClientes('nuevoReporte', nuevoReporte);
+    const usuarios = await Usuario.find({ tipoSuscripcion: tipo });
+    usuarios.forEach(async (usuario) => {
+    try {
+        const response = await admin.messaging().send({
+            token: usuario.token,
+            notification: {
+                title: `Nuevo reporte ${tipo}!`,
+                body: `${quePasa} - ${direccion}`,
+            },
+            data: { 
+                quePasa, direccion, informacionExtra, tipo, 
+                fecha: String(nuevoReporte.fecha),
+                ReporteId: nuevoReporte._id.toString()
+            }
+        });
+        console.log(`Notificación enviada correctamente: ${response}`);
+    } catch (error) {
+        console.error(`Error al enviar la notificación a ${usuario.token}:`, error);
+    }
+});
 
     res.status(201).json(nuevoReporte);
 };
